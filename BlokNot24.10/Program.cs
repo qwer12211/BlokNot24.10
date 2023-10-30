@@ -8,7 +8,7 @@ class Program
     private static int poz = 0;
     static void Main(string[] args)
     {
-        Allnotes();
+        zametka();
         ConsoleKeyInfo key;
 
         do
@@ -29,7 +29,7 @@ class Program
                         poz++;
                     break;
                 case ConsoleKey.Enter:
-                    SND(notes[poz]);
+                    Opisanie(notes[poz]);
                     break;
                 case ConsoleKey.LeftArrow:
                     currentDate = currentDate.AddDays(-1); // не работает переключение дат, почему не знаю
@@ -43,7 +43,7 @@ class Program
 
     private static void Menu()
     {
-        Console.WriteLine($"Дата: {DateTime.Now}"); 
+        Console.WriteLine($"Дата: {DateTime.Now}");
         Console.WriteLine();
 
         for (int i = 0; i < notes.Count; i++)
@@ -52,7 +52,7 @@ class Program
             Console.WriteLine(notes[i].Naznanie);
         }
     }
-    private static void Allnotes()
+    private static void zametka()
     {
         notes.Add(new Note
         {
@@ -89,10 +89,10 @@ class Program
         {
             Naznanie = "Придти домой",
             Opisanie = "отдохнуть",
-            Date = new DateTime(2023, 12, 12), 
+            Date = new DateTime(2023, 12, 12),
         });
     }
-    private static void SND(Note note)
+    private static void Opisanie(Note note)
     {
         Console.Clear();
         Console.WriteLine($"Название: {note.Naznanie}");
