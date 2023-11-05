@@ -1,112 +1,89 @@
-using System;
-using System.Collections.Generic;
-using static System.Net.Mime.MediaTypeNames;
+Console.WriteLine($" Выбранная дата:: {DateTime.Now}");
+Console.WriteLine("  Заметка 1");
+Console.WriteLine("  Заметка 2");
+Console.WriteLine("  Заметка 3");
+Console.WriteLine("  Заметка 4");
+Console.WriteLine("  Заметка 5");
 
-class Program
+
+int pos = 1;
+ConsoleKeyInfo key;
+Console.CursorVisible = false;
+
+do
 {
-    private static List<Note> notes = new List<Note>();
-    private static int poz = 0;
-    static void Main(string[] args)
+    key = Console.ReadKey();
+
+    Console.SetCursorPosition(0, pos);
+    Console.WriteLine("  ");
+
+    if (key.Key == ConsoleKey.UpArrow && pos != 1)
     {
-        zametka();
-        ConsoleKeyInfo key;
-
-        do
-        {
-            Console.Clear();
-            Menu();
-
-            key = Console.ReadKey();
-            DateTime currentDate = DateTime.Now;
-            switch (key.Key)
-            {
-                case ConsoleKey.UpArrow:
-                    if (poz > 0)
-                        poz--;
-                    break;
-                case ConsoleKey.DownArrow:
-                    if (poz < notes.Count - 1)
-                        poz++;
-                    break;
-                case ConsoleKey.Enter:
-                    Opisanie(notes[poz]);
-                    break;
-                case ConsoleKey.LeftArrow:
-                    currentDate = currentDate.AddDays(-1); // не работает переключение дат, почему не знаю
-                    break;
-                case ConsoleKey.RightArrow:
-                    currentDate = currentDate.AddDays(1);
-                    break;
-            }
-        } while (key.Key != ConsoleKey.Escape);
+        pos--;
     }
-
-    private static void Menu()
+    else if (key.Key == ConsoleKey.DownArrow && pos != 5)
     {
-        Console.WriteLine($"Дата: {DateTime.Now}");
-        Console.WriteLine();
-
-        for (int i = 0; i < notes.Count; i++)
-        {
-            Console.Write(i == poz ? "-> " : "  ");
-            Console.WriteLine(notes[i].Naznanie);
-        }
+        pos++;
     }
-    private static void zametka()
-    {
-        notes.Add(new Note
-        {
-            Naznanie = "Придти на пары",
-            Opisanie = "Отсидеть пять пар",
-            Date = new DateTime(2023, 12, 12), // не понимаю как сделать унивесальную дату
+    Console.SetCursorPosition(0, pos);
+    Console.WriteLine("->");
 
-        });
-
-        notes.Add(new Note
-        {
-            Naznanie = "Сходить в магазин",
-            Opisanie = "Купить хлеба",
-            Date = new DateTime(2023, 12, 12),
-
-        });
-
-        notes.Add(new Note
-        {
-            Naznanie = "Пойти погулять",
-            Opisanie = "Прогуляться по парку",
-            Date = new DateTime(2023, 12, 12),
-
-        });
-
-        notes.Add(new Note
-        {
-            Naznanie = "Сделать уроки",
-            Opisanie = "Выполнить практические работы",
-            Date = new DateTime(2023, 12, 12),
-        });
-
-        notes.Add(new Note
-        {
-            Naznanie = "Придти домой",
-            Opisanie = "отдохнуть",
-            Date = new DateTime(2023, 12, 12),
-        });
-    }
-    private static void Opisanie(Note note)
-    {
-        Console.Clear();
-        Console.WriteLine($"Название: {note.Naznanie}");
-        Console.WriteLine("-----------------------------------");
-        Console.WriteLine($"Описание: {note.Opisanie}");
-        Console.WriteLine($"Дата: {DateTime.Now}");
-        Console.WriteLine("\nНажмите любую клавишу для возврата.");
-        Console.ReadKey();
-    }
-}
-class Note
+} while (key.Key != ConsoleKey.Enter);
+Console.Clear();
+if (pos == 1)
 {
-    public string Naznanie { get; set; }
-    public string Opisanie { get; set; }
-    public DateTime Date { get; set; }
-    public bool IsCompleted { get; set; }
+    Console.WriteLine("Придти на пары");
+    Console.WriteLine("-----------------------");
+    Console.WriteLine("Описание: ");
+    Console.WriteLine($"Дата: {DateTime.Now} ");
 }
+
+if (pos == 2)
+{
+    Console.WriteLine("Сходить в магазин");
+    Console.WriteLine("-----------------------");
+    Console.WriteLine("Описание: - ");
+    Console.WriteLine($"Дата: {DateTime.Now}  ");
+}
+
+if (pos == 3)
+{
+    Console.WriteLine("Придти на пары");
+    Console.WriteLine("-----------------------");
+    Console.WriteLine("Описание:  ");
+    Console.WriteLine($"Дата: {DateTime.Now} ");
+}
+
+if (pos == 4)
+{
+    Console.WriteLine("Сходить в магазин");
+    Console.WriteLine("-----------------------");
+    Console.WriteLine("Описание: купить хлеба ");
+    Console.WriteLine($"Дата: {DateTime.Now}  ");
+}
+if (pos == 5)
+{
+    Console.WriteLine("Придти на пары");
+    Console.WriteLine("-----------------------");
+    Console.WriteLine("Описание:  ");
+    Console.WriteLine($"Дата: {DateTime.Now} ");
+}
+do
+{
+    key = Console.ReadKey();
+
+    Console.SetCursorPosition(0, pos);
+    Console.WriteLine("  ");
+
+    if (key.Key == ConsoleKey.LeftArrow && pos != 1)
+    {
+        pos--;
+    }
+    else if (key.Key == ConsoleKey.RightArrow && pos != 4)
+    {
+        pos++;
+    }
+    Console.SetCursorPosition(0, pos);
+
+} while (key.Key != ConsoleKey.Enter);
+Console.Clear();
